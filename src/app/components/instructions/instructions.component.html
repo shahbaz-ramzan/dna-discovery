@@ -1,0 +1,106 @@
+<div class="dna-spinner" *ngIf="pageLoading">
+    <p-progressSpinner></p-progressSpinner>
+</div>
+<div class="bg-white" *ngIf="!pageLoading">
+    <header
+        data-testId="header"
+        class="navbar-light d-flex justify-content-between pt-5 align-items-center container"
+    >
+        <img data-testId="logo" [src]="logo" class="maxheight-40" alt="" />
+        <div class="logout-dropdown" data-testId="logout-dropdown">
+            <button
+                type="button"
+                class="head-dropdown"
+                pButton
+                pRipple
+                icon="pi pi-angle-down"
+                (click)="menu.toggle($event)"
+            >
+                <i class="icon-user"></i>
+            </button>
+            <p-menu
+                #menu
+                [popup]="true"
+                [appendTo]="'logout-dropdown'"
+                [model]="items"
+            ></p-menu>
+        </div>
+    </header>
+
+    <div class="discover-dna-wrap">
+        <div class="container">
+            <ul class="steper-progress mb-sm-5">
+                <li class="active" data-testId="title">
+                    <span>Create Your Account</span>
+                </li>
+                <li class="current" data-testId="title-2">
+                    <span>Discover Your DNA</span>
+                </li>
+            </ul>
+            <div class="row align-items-center flex-lg-row flex-column-reverse">
+                <div
+                    class="col-md-12 col-lg-6 pe-lg-5 mt-lg-0 mt-4"
+                    data-testId="instructions"
+                >
+                    <h2>Instructions</h2>
+                    <p>
+                        Each question has three statements. You’ll be asked to
+                        choose two of the statements for each question – how you
+                        <b>most</b> naturally operate and how you
+                        <b>least</b> naturally operate. Base your choices on how
+                        you act, make decisions, and interact. You might find
+                        some questions more difficult than others, go with your
+                        intuition and don’t dwell on it.
+                    </p>
+                    <p>{{ instructionsText?.p2 }}</p>
+                    <p>{{ instructionsText?.p3 }}</p>
+                    <button
+                        data-testId="start-discovery-btn"
+                        pButton
+                        iconPos="right"
+                        class="submit-btn primary-btn mt-4"
+                        label="Start Discovery"
+                        icon="pi pi-arrow-right"
+                        (click)="onClick()"
+                    ></button>
+                </div>
+                <div
+                    class="col-md-12 col-lg-6"
+                    data-testId="video-thumbnail-content"
+                >
+                    <div class="thumbnail-overlay position-relative">
+                        <img
+                            class="w-100"
+                            src="assets/images/welcome-image.png"
+                            alt="welcome-image"
+                        />
+                        <img
+                            (click)="showModalDialog()"
+                            class="position-absolute play-button"
+                            src="assets/images/play-button.png"
+                            alt="play-icon"
+                        />
+                        <h5 class="video-thumbnail-content">Instructions</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p-dialog
+        [(visible)]="displayModal"
+        [breakpoints]="{ '767px': '100%' }"
+        [style]="{ maxWidth: '600px', width: '100%' }"
+    >
+        <iframe
+            width="100%"
+            height="315"
+            [src]="instructionsVideo | safe"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
+    </p-dialog>
+</div>

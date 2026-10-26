@@ -1,0 +1,41 @@
+.footer-wrapper {
+    float: left;
+    width: 100%;
+    min-height: 53px;
+    padding: 10px 15px;
+    text-align: center;
+    background-color: #f2f2f2;
+    font-size: 11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    a {
+        color: var(--nav-gray-txt);
+    }
+    .expanded-text {
+        font-weight: 700;
+        cursor: pointer;
+    }
+    .legalFullText {
+        @media screen and (min-width: 768px) {
+            max-width: 55%;
+        }
+        margin: 0 auto;
+    }
+    .legalText {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        & > * {
+            display: inline-block;
+        }
+        .content {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 30%;
+        }
+    }
+}

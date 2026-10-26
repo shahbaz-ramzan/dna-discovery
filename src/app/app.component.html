@@ -1,0 +1,17 @@
+<p-toast></p-toast>
+<p-toast class="questonair-toast" position="top-right" key="speedUp">
+    <ng-template let-message pTemplate="message">
+        <div class="toaster-cont">
+            <img class="toaster-img" src="../assets/images/turtle.png" alt="" />
+            <p class="totaster-text">
+                You are going slower than average. Remember, go with your first
+                instinct
+            </p>
+        </div>
+    </ng-template>
+</p-toast>
+<div class="discovery-wrap">
+    <router-outlet></router-outlet>
+</div>
+<app-footer></app-footer>
+

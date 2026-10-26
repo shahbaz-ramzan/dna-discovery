@@ -1,0 +1,26 @@
+<!-- <div
+    class="dna-spinner"
+    *ngIf="loading"
+>
+    <p-progressSpinner></p-progressSpinner>
+</div> -->
+<div class="emailOutput" data-testId="email-output">
+    <div class="subs-sucess">
+        <i class="icon-check"></i>
+        <h3>Opt Out Successful!</h3>
+        <p>
+            No more reminders regarding the Natural Behavior discovery process
+            will be sent to you.
+        </p>
+        <button
+            data-testId="back-to-app-btn"
+            pButton
+            pRipple
+            iconPos="right"
+            class="submit-btn primary-btn"
+            (click)="backToApp()"
+        >
+            Back To App
+        </button>
+    </div>
+</div>

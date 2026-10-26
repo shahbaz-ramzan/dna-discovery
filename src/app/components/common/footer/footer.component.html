@@ -1,0 +1,48 @@
+<div class="footer-wrapper">
+    <div
+        data-testId="legal-text"
+        [ngClass]="!expanded ? 'legalText' : 'legalFullText'"
+        *ngIf="legalText"
+    >
+        <span [ngClass]="{ content: !expanded && legalText.length > 150 }">
+            {{ legalText }}
+        </span>
+        <a
+            (click)="expandCollapse()"
+            *ngIf="legalText.length > 150"
+            class="expanded-text"
+            >{{ !expanded ? "Read More" : "Read Less" }}</a
+        >
+    </div>
+    <div class="d-block w-100" data-testId="copyright">
+        <span class="copyright"
+            >© Copyright {{ footerYear }} DNA Behavior Solutions,
+            LLC&nbsp;|</span
+        >
+        <span class="terms-condition"
+            ><a
+                href="https://dnabehavior.com/main-services-agreement"
+                target="_blank"
+                >Terms and Conditions |</a
+            ></span
+        >
+        <span class="privacy-policy"
+            ><a
+                href="https://dnabehavior.com/privacy-policy"
+                target="_blank"
+                data-node-uid="806"
+            >
+                Privacy Policy</a
+            ></span
+        >
+    </div>
+</div>
+<!-- <hm-read-more
+    hm-text="{{ legalText }}"
+    hm-limit="100"
+    hm-more-text="read more"
+    hm-less-text="read less"
+    hm-dots-class="dots"
+    hm-link-class="links"
+>
+</hm-read-more> -->

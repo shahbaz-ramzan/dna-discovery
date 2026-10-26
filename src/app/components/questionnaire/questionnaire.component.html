@@ -1,0 +1,124 @@
+<div
+    class="dna-spinner"
+    *ngIf="
+        questionListLoading ||
+        questionStatusLoading ||
+        savingQuestionLoading ||
+        discoveryStatusLoading
+    "
+>
+    <p-progressSpinner></p-progressSpinner>
+</div>
+<header class="questionair-head">
+    <div class="container d-flex justify-content-between">
+        <h2 data-testId="title">Discover Your DNA</h2>
+        <div class="logout-dropdown" data-testId="logour-dropdown">
+            <a class="instruction-text" (click)="showInstructionDialog()"
+                >Instructions</a
+            >
+            <button
+                type="button"
+                class="head-dropdown"
+                pButton
+                pRipple
+                icon="pi pi-angle-down"
+                (click)="menu.toggle($event)"
+            >
+                <i class="icon-user"></i>
+            </button>
+            <p-menu
+                #menu
+                [popup]="true"
+                [appendTo]="'logout-dropdown'"
+                [model]="items"
+            ></p-menu>
+        </div>
+    </div>
+</header>
+<!-- <button (click)="speedUpPrompt()">Confirm</button> -->
+<div
+    #animateMe
+    class="container questionair-wrap animate financial-dna-survey-form"
+>
+    <p-progressBar
+        data-testId="progressbar"
+        [value]="questionProgress"
+    ></p-progressBar>
+    <p data-testId="progressbar-percentage" class="completed-text mb-4">
+        {{ questionProgress }} % Completed
+    </p>
+    <h4 data-testId="question-number">
+        Question {{ currentQuestionNumber }} of 46
+    </h4>
+    <ul
+        class="questionair-list list-unstyled pt-4"
+        data-testId="questionair-section"
+    >
+        <ng-container *ngFor="let part of currentQuestion; index as i">
+            <li>
+                <div class="">
+                    <h4 data-testId="question-title">{{ part?.title }}</h4>
+                    <p data-testId="question-description">
+                        {{ part?.description }}
+                    </p>
+                </div>
+                <div
+                    class="d-flex action-btn-wrap"
+                    data-testId="question-options"
+                >
+                    <p-selectButton
+                        [options]="selectionOptions"
+                        [(ngModel)]="part.selectedValue"
+                        optionLabel="label"
+                        optionValue="value"
+                        (onChange)="valueChange(i, $event.value, menu)"
+                    ></p-selectButton>
+                </div>
+            </li>
+        </ng-container>
+    </ul>
+</div>
+
+<div class="container question-footer" data-testId="questionaire-footer">
+    <footer>
+        <img class="footer-logo" [src]="logo" class="maxheight-40" alt="" />
+        <div class="arrow-btn-wrap d-flex">
+            <button
+                data-testId="prev-btn"
+                pButton
+                icon="pi pi-angle-left"
+                class="p-button-outlined"
+                *ngIf="goBack"
+                (click)="previousQuestion(menu)"
+            ></button>
+            <button
+                data-testId="next-btn"
+                pButton
+                icon="pi pi-angle-right"
+                class="p-button-outlined"
+                (click)="nextQuestion(menu)"
+            ></button>
+        </div>
+    </footer>
+</div>
+
+<p-dialog
+    header="Instructions"
+    [(visible)]="instructionModal"
+    [modal]="true"
+    class="instruction-modal dna-modal"
+    [baseZIndex]="10000"
+    [draggable]="false"
+    [resizable]="false"
+>
+    <p>
+        Each question has three statements. You’ll be asked to choose two of the
+        statements for each question – how you
+        <b>most</b> naturally operate and how you <b>least</b> naturally
+        operate. Base your choices on how you act, make decisions, and interact.
+        You might find some questions more difficult than others, go with your
+        intuition and don’t dwell on it.
+    </p>
+    <p>{{ instructionsText?.p2 }}</p>
+    <p>{{ instructionsText?.p3 }}</p>
+</p-dialog>

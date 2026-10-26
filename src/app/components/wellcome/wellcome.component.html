@@ -1,0 +1,147 @@
+<div
+    class="dna-spinner"
+    *ngIf="accountDetailsLoading || linkValidationLoading || redirecting"
+>
+    <p-progressSpinner></p-progressSpinner>
+</div>
+<div class="bg-white" *ngIf="!linkValidationLoading || redirecting">
+    <header class="navbar-light pt-5 container">
+        <img
+            data-testId="header-logo"
+            [src]="
+                appName === 'investor'
+                    ? FDNA?.logo
+                    : appName === 'talent'
+                    ? BDNA?.logo
+                    : ''
+            "
+            class="maxheight-40"
+            alt=""
+        />
+    </header>
+    <div class="container main-wellcome-wrap">
+        <div class="row align-items-center flex-lg-row flex-column-reverse">
+            <div
+                class="col-xs-12 col-sm-12 col-md-12 col-lg-6 pe-lg-5 mt-lg-0 mt-4"
+            >
+                <h1 class="custom-h1 fw-bold" data-testId="title">
+                    {{
+                        appName === "investor"
+                            ? FDNA?.welcomeTitle
+                            : appName === "talent"
+                            ? BDNA?.welcomeTitle
+                            : ""
+                    }}
+                </h1>
+                <p data-testId="desc">
+                    {{
+                        appName === "investor"
+                            ? FDNA?.description
+                            : appName === "talent"
+                            ? BDNA?.description
+                            : ""
+                    }}
+                </p>
+                <div class="login-btn-wrap">
+                    <button
+                        data-testId="login-btn"
+                        pButton
+                        iconPos="right"
+                        class="submit-btn primary-btn"
+                        label="Login"
+                        icon="pi pi-arrow-right"
+                        (click)="login()"
+                    ></button>
+                    <button
+                        data-testId="signup-btn"
+                        *ngIf="showSignUpButton"
+                        pButton
+                        iconPos="right"
+                        class="submit-btn primary-btn"
+                        label="Signup"
+                        icon="pi pi-arrow-right"
+                        (click)="signup()"
+                    ></button>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="thumbnail-overlay position-relative">
+                    <img
+                        data-testId="welcome-image"
+                        class="w-100"
+                        src="assets/images/welcome-image.png"
+                        alt="welcome-image"
+                    />
+                    <img
+                        data-testId="welcome-video-player"
+                        (click)="showModalDialog()"
+                        class="position-absolute play-button"
+                        src="assets/images/play-button.png"
+                        alt="play-icon"
+                    />
+                    <h5 class="video-thumbnail-content">How It Works</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-dialog
+    header="Error"
+    [(visible)]="showGoDNAModal"
+    [draggable]="false"
+    [modal]="true"
+    [closable]="true"
+    [style]="{ width: '500px' }"
+    (onHide)="onGoDNAModalClose()"
+>
+    <p>Oops - looks like you landed in the wrong place. </p>
+    <p class="mt-2 mb-2">Please use the links below to navigate to the correct place.</p>
+    <ul>
+        <li><a href="https://app.godna.ai/" target="_blank">GoDNA App</a></li>
+    </ul>
+    <ng-template pTemplate="footer">
+        <button
+            pButton
+            type="button"
+            class="submit-btn primary-btn"
+            label="Okay"
+            (click)="showGoDNAModal = false"
+        ></button>
+    </ng-template>
+</p-dialog>
+
+<p-dialog
+    header="Error"
+    [(visible)]="showSubscriptionModal"
+    [draggable]="false"
+    [modal]="true"
+    [closable]="true"
+    [style]="{ width: '500px' }"
+    styleClass="subscription-modal"
+    (onHide)="onSubscriptionModalClose()"
+>
+    <p>This account, Account #:{{ accountId }}, does not have an active subscription.</p>
+    <ng-template pTemplate="footer">
+        <button
+            pButton
+            type="button"
+            class="submit-btn primary-btn"
+            label="OK"
+            (click)="onSubscriptionModalClose()"
+        ></button>
+    </ng-template>
+</p-dialog>
+
+<p-dialog class="video-modal" [(visible)]="displayModal" [draggable]="false">
+    <iframe
+        width="100%"
+        height="315"
+        [src]="(appName === 'investor' ? FDNA.videoUrl : BDNA.videoUrl) | safe"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        referrerpolicy="strict-origin-when-cross-origin"
+    ></iframe>
+</p-dialog>

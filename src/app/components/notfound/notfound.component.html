@@ -1,0 +1,55 @@
+<div class="notfound-wrapper">
+    <div class="notfound-logo container">
+        <img src="../../../assets/images/404-logo.png" alt="" />
+    </div>
+    <div class="container-fluid mw-860">
+        <div class="notfound-cnt-wrapper">
+            <h2 data-testId="title">
+                Let us help you find the perfect login spot.
+            </h2>
+            <p data-testId="details">
+                We offer two distinct experiences with different insights
+                available: <b>Financial Behavior Insights</b> and
+                <b>Work Talent Insights</b>. Please select the option that suits
+                your interests to get started.
+            </p>
+            <div class="notfound-btn-wrapper w-100">
+                <div class="row">
+                    <div class="col-12 col-sm-6">
+                        <div class="app-logo" data-testId="logo">
+                            <img
+                                src="../../../assets/images/financial-dna-logo.svg"
+                                alt=""
+                            />
+                        </div>
+                        <button
+                            data-testId="fb-discovery-btn"
+                            pButton
+                            type="button"
+                            label="Financial Behavior Discovery"
+                            class="investor-btn"
+                            (click)="investorClick()"
+                        ></button>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="app-logo">
+                            <img
+                                src="../../../assets/images/bdna-logo.svg"
+                                alt=""
+                            />
+                        </div>
+
+                        <button
+                            data-testId="wt-discovery-btn"
+                            pButton
+                            type="button"
+                            label="Work Talent Discovery"
+                            class="talent-btn"
+                            (click)="talentClick()"
+                        ></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

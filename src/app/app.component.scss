@@ -1,0 +1,32 @@
+:host {
+    ::ng-deep .questonair-toast {
+        .p-toast {
+            opacity: 1;
+            max-width: 395px;
+            width: auto;
+            @media screen and (max-width: 425px) {
+                left: 10px;
+                right: 10px;
+            }
+            .toaster-img {
+                width: 80px;
+            }
+            .p-toast-message.p-toast-message-info {
+                border-radius: 10px;
+                .p-toast-message-content {
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                }
+            }
+            .toaster-cont {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                p {
+                    color: #d9a300;
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
